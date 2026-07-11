@@ -145,10 +145,10 @@ export default function WatchVideoBadge() {
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
           placeholder="Watch video about this here..."
-          className="w-full h-full bg-transparent pl-8 pr-[72px] text-[15px] font-medium text-white placeholder-white/60 tracking-tight outline-none border-none cursor-text rounded-full"
+          className="w-full h-full bg-transparent pl-8 pr-[80px] text-[15px] font-medium text-white placeholder-white/60 tracking-tight outline-none border-none cursor-text rounded-full"
         />
 
-        {/* Overlaid blue action circular button, perfectly inside the capsule with right-1.5 and top-1.5 */}
+        {/* Overlaid blue action circular button, styled exactly matching unnamed (18) (1).jpg */}
         <motion.button
           onClick={() => {
             if (query.trim() !== "") {
@@ -156,13 +156,13 @@ export default function WatchVideoBadge() {
               setIsOpen(false);
             }
           }}
-          className="absolute right-1.5 top-1.5 w-[52px] h-[52px] rounded-full bg-[#005eff] flex items-center justify-center shadow-[0_4px_14px_rgba(0,94,255,0.4)] cursor-pointer outline-none focus:ring-2 focus:ring-[#005eff] focus:ring-offset-2 focus:ring-offset-[#181920] transition-shadow duration-200"
+          className="absolute right-[12px] top-[-8px] w-[56px] h-[56px] rounded-full bg-[#005eff] flex items-center justify-center shadow-[0_4px_14px_rgba(0,94,255,0.4)] cursor-pointer outline-none focus:ring-2 focus:ring-[#005eff] focus:ring-offset-2 focus:ring-offset-[#181920] transition-shadow duration-200"
           variants={buttonVariants}
           animate={isHovered ? "hover" : "initial"}
         >
           {/* Centered Chevron Arrow Indicator */}
           <motion.div variants={chevronVariants} className="flex items-center justify-center">
-            <ChevronRight className="w-5.5 h-5.5 text-white stroke-[2.5]" />
+            <ChevronRight className="w-6 h-6 text-white stroke-[2.5]" />
           </motion.div>
         </motion.button>
       </motion.div>
