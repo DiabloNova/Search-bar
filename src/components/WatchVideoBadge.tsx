@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 
-// Mock suggestion database
+// Mock suggestion database for initial verification
 const MOCK_SUGGESTIONS = [
   "Next.js App Router Deep Dive",
   "Framer Motion 3D Tilt Tutorial",
@@ -82,15 +82,15 @@ export default function WatchVideoBadge() {
     console.log(`Selected suggestion: ${suggestion}`);
   };
 
-  // Main container hover variants configuration
+  // Main container hover variants configuration - scale to 1.02 and apply standard shadow
   const containerVariants: Variants = {
     initial: {
       scale: 1,
-      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)"
+      boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.1)"
     },
     hover: {
-      scale: 1.015,
-      boxShadow: "0 15px 35px rgba(0, 0, 0, 0.15)",
+      scale: 1.02,
+      boxShadow: "0px 15px 35px rgba(0, 0, 0, 0.15)",
       transition: { duration: 0.25, ease: "easeOut" }
     }
   };
@@ -125,7 +125,7 @@ export default function WatchVideoBadge() {
     <div ref={containerRef} className="relative z-50 w-[420px]">
       {/* Search Bar / BadgeBody Base Container */}
       <motion.div
-        className="relative w-full h-[64px] bg-[#181920] rounded-full flex items-center border-none select-none"
+        className="relative w-full h-[64px] bg-[#181920] rounded-full flex items-center border-none select-none shadow-[0_10px_30px_rgba(0,0,0,0.1)]"
         variants={containerVariants}
         initial="initial"
         animate={isHovered ? "hover" : "initial"}
@@ -145,10 +145,10 @@ export default function WatchVideoBadge() {
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
           placeholder="Watch video about this here..."
-          className="w-full h-full bg-transparent pl-8 pr-20 text-[15px] font-medium text-white placeholder-white/60 tracking-tight outline-none border-none cursor-text rounded-full"
+          className="w-full h-full bg-transparent pl-8 pr-[72px] text-[15px] font-medium text-white placeholder-white/60 tracking-tight outline-none border-none cursor-text rounded-full"
         />
 
-        {/* Overlaid blue action circular button, perfectly inside the capsule */}
+        {/* Overlaid blue action circular button, perfectly inside the capsule with right-1.5 and top-1.5 */}
         <motion.button
           onClick={() => {
             if (query.trim() !== "") {
@@ -156,18 +156,18 @@ export default function WatchVideoBadge() {
               setIsOpen(false);
             }
           }}
-          className="absolute right-2 top-2 w-[48px] h-[48px] rounded-full bg-[#005eff] flex items-center justify-center shadow-[0_4px_14px_rgba(0,94,255,0.4)] cursor-pointer outline-none focus:ring-2 focus:ring-[#005eff] focus:ring-offset-2 focus:ring-offset-[#181920] transition-shadow duration-200"
+          className="absolute right-1.5 top-1.5 w-[52px] h-[52px] rounded-full bg-[#005eff] flex items-center justify-center shadow-[0_4px_14px_rgba(0,94,255,0.4)] cursor-pointer outline-none focus:ring-2 focus:ring-[#005eff] focus:ring-offset-2 focus:ring-offset-[#181920] transition-shadow duration-200"
           variants={buttonVariants}
           animate={isHovered ? "hover" : "initial"}
         >
           {/* Centered Chevron Arrow Indicator */}
           <motion.div variants={chevronVariants} className="flex items-center justify-center">
-            <ChevronRight className="w-5 h-5 text-white stroke-[2.5]" />
+            <ChevronRight className="w-5.5 h-5.5 text-white stroke-[2.5]" />
           </motion.div>
         </motion.button>
       </motion.div>
 
-      {/* Dynamic Suggestions Dropdown List */}
+      {/* Dynamic Suggestions Dropdown List with Premium Dark Glassmorphism */}
       <AnimatePresence>
         {isOpen && filteredSuggestions.length > 0 && (
           <motion.div
@@ -176,7 +176,7 @@ export default function WatchVideoBadge() {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="absolute top-[72px] left-0 w-full rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
+            className="absolute top-[72px] left-0 w-full rounded-2xl border border-white/20 bg-[#181920]/95 backdrop-blur-lg overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
           >
             <ul className="py-2 flex flex-col">
               {filteredSuggestions.map((item, index) => {
@@ -186,7 +186,7 @@ export default function WatchVideoBadge() {
                     key={item}
                     onClick={() => selectSuggestion(item)}
                     onMouseEnter={() => setFocusedIndex(index)}
-                    className={`px-6 py-3.5 text-[14px] text-white/90 font-medium tracking-tight cursor-pointer transition-colors duration-150 select-none ${
+                    className={`px-6 py-3.5 text-[14px] text-slate-200 font-medium tracking-tight cursor-pointer transition-colors duration-150 select-none ${
                       isSelected
                         ? "bg-white/20 text-white font-semibold"
                         : "hover:bg-white/10 hover:text-white"
